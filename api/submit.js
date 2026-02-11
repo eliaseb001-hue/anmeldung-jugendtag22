@@ -1,6 +1,8 @@
 import { MongoClient } from "mongodb";
 
 export default async function handler(req, res) {
+  console.log("Request method:", req.method);
+  console.log("Request body:", req.body);
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Nur POST erlaubt" });
   }
@@ -25,3 +27,4 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: "Fehler beim Speichern der Daten" });
   }
 }
+
