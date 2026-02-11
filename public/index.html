@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anmeldung Jugendtag</title>
+<style>
+body { font-family: 'Inter', sans-serif; background: #f0ebf8; margin: 0; padding: 40px 15px; }
+.kleiner-abstand { margin-top: 0; margin-bottom: 8px; }
+.form-container { max-width: 700px; margin: auto; background: white; border-radius: 14px; box-shadow: 0 6px 18px rgba(0,0,0,0.1); overflow: hidden; }
+.banner img { width: 100%; height: 200px; object-fit: cover; display: block; }
+.content { padding: 30px 35px; }
+h1 { margin-top: 0; font-size: 26px; }
+.description { color: #555; margin-bottom: 50px; line-height: 1.5; border-bottom: 2px solid #ccc }
+.form-group { margin-bottom: 28px; }
+label { font-weight: bold; display: block; margin-bottom: 8px; }
+.required::after { content: " *"; color: red; }
+input[type="text"], textarea { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 15px; transition: 0.2s; }
+input[type="text"]:focus, textarea:focus { border-color: #673ab7; outline: none; box-shadow: 0 0 0 2px rgba(103,58,183,0.15); }
+.option { margin: 10px 0; display: flex; align-items: center; gap: 10px; }
+.option input { transform: scale(1.2); cursor: pointer; }
+.other-text { margin-left: 28px; margin-top: 8px; display: none; }
+button { background: #673ab7; color: white; border: none; padding: 14px 22px; border-radius: 8px; font-size: 16px; cursor: pointer; margin-top: 15px; transition: 0.2s; }
+button:hover { background: #5a2fa5; }
+.footer-note { margin-top: 20px; font-size: 13px; color: #777; }
+</style>
+</head>
+<body>
+
+<div class="form-container">
+    <div class="banner">
+        <img src="banner.jpg" alt="Bild">
+    </div>
+
+    <div class="content">
+        <h1>Anmeldung zum Jugendtag in Bietigheim-Bissingen</h1>
+        <div class="description">
+            <p class ="kleiner-abstand">Thema: Die geistliche Waffenrüstung des Christen</p>
+            <p class ="kleiner-abstand">Referent: Stephan Isenberg</p>
+            <p class ="kleiner-abstand">Datum: 28. März 2026</p>
+            <p class ="kleiner-abstand">Uhrzeit: 14:00 - 21:00 Uhr</p>
+            <p class ="kleiner-abstand">Adresse: Gustav-Mahler-Straße 4, 74321 Bietigheim-Bissingen</p>
+            <p></p>
+            <p><strong>Anmeldeschluss: 15. März 2026</strong></p>
+        </div>
+
+        <form id="anmeldungForm">
+            <div class="form-group">
+                <label class="required">Dein Name</label>
+                <input type="text" name="name" required placeholder="Vor- und Nachname">
+            </div>
+
+            <div class="form-group">
+                <label class="required">Falls genügend Leute Sport machen wollen, werden wir Räumlichkeiten mieten. Bitte gib hier an, worauf du in der Pause am meisten Lust hast</label>
+                <div class="option"><input type="radio" name="teilnahme" value="Fußball" required> Fußball</div>
+                <div class="option"><input type="radio" name="teilnahme" value="Volleyball"> Volleyball</div>
+                <div class="option"><input type="radio" name="teilnahme" value="Tischtennis"> Tischtennis</div>
+                <div class="option"><input type="radio" name="teilnahme" value="Keines davon"> Keines davon</div>
+            </div>
+
+            <div class="form-group">
+                <label>Besondere Essenswünsche/Allergien</label>
+                <div class="option"><input type="checkbox" name="interessen" value="Keine"> Keine</div>
+                <div class="option"><input type="checkbox" name="interessen" value="Vegetarisch"> Vegetarisch</div>
+                <div class="option"><input type="checkbox" name="interessen" value="Glutenfrei"> Essen & Drinks</div>
+                <div class="option"><input type="checkbox" id="otherCheck" value="Sonstiges"> Sonstiges</div>
+                <div class="other-text" id="otherText">
+                    <input type="text" name="otherText" placeholder="Bitte angeben...">
+                </div>
+            </div>
+
+            <button type="submit">Anmeldung absenden</button>
+
+            <div class="footer-note">
+                Hinweis: Deine Angaben werden ausschließlich zur Planung und Durchführung dieses Jugendtages verwendet.
+                Die Daten werden temporär in einer geschützten Datenbank gespeichert, auf die nur der Veranstalter Zugriff hat.
+                Es erfolgt keine Weitergabe an Dritte, keine Veröffentlichung und keine Nutzung für Werbung.
+                Nach Abschluss des Jugendtages werden die Daten gelöscht. 
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+// Sonstiges-Feld ein-/ausblenden
+const otherCheck = document.getElementById("otherCheck");
+const otherText = document.getElementById("otherText");
+otherCheck.addEventListener("change", function() {
+    otherText.style.display = this.checked ? "block" : "none";
+});
+
+// Formular absenden an Serverless Function
+document.getElementById("anmeldungForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = {
+        name: formData.get("name"),
+        teilnahme: formData.get("teilnahme"),
+        interessen: formData.getAll("interessen").join(", "),
+        sonstiges: formData.get("otherText") || ""
+    };
+
+    try {
+        const res = await fetch("/api/submit", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+
+        if(res.ok){
+            // Absoluter Pfad sorgt für zuverlässige Weiterleitung auf Vercel
+            window.location.assign("/danke.html");
+        } else {
+            alert("Beim Absenden ist ein Fehler aufgetreten. Bitte versuche es später.");
+        }
+    } catch(err) {
+        console.error(err);
+        alert("Fehler beim Absenden. Bitte versuche es später.");
+    }
+});
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
