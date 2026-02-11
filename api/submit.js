@@ -1,19 +1,16 @@
 import { MongoClient } from "mongodb";
 
 export default async function handler(req, res) {
-  console.log("Request method:", req.method);
-  console.log("Request body:", req.body);
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Nur POST erlaubt" });
   }
 
   try {
-    // MongoDB verbinden über Vercel Environment Variable
     const client = new MongoClient(process.env.MONGODB_URI);
     await client.connect();
 
-    const db = client.db("eventDB"); // Name deiner DB
-    const collection = db.collection("anmeldungen"); // Name der Collection
+    const db = client.db("eventDB"); // Datenbankname
+    const collection = db.collection("anmeldungen"); // Collection
 
     const data = req.body;
     data.timestamp = new Date();
@@ -27,4 +24,6 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: "Fehler beim Speichern der Daten" });
   }
 }
+
+
 
