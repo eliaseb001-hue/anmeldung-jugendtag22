@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -7,12 +7,11 @@
 <title>Anmeldung Jugendtag</title>
 <style>
 body { font-family: 'Inter', sans-serif; background: #f0ebf8; margin: 0; padding: 40px 15px; }
-.kleiner-abstand { margin-top: 0; margin-bottom: 8px; }
 .form-container { max-width: 700px; margin: auto; background: white; border-radius: 14px; box-shadow: 0 6px 18px rgba(0,0,0,0.1); overflow: hidden; }
 .banner img { width: 100%; height: 200px; object-fit: cover; display: block; }
 .content { padding: 30px 35px; }
 h1 { margin-top: 0; font-size: 26px; }
-.description { color: #555; margin-bottom: 50px; line-height: 1.5; border-bottom: 2px solid #ccc }
+.description { color: #555; margin-bottom: 30px; line-height: 1.5; }
 .form-group { margin-bottom: 28px; }
 label { font-weight: bold; display: block; margin-bottom: 8px; }
 .required::after { content: " *"; color: red; }
@@ -36,13 +35,13 @@ button:hover { background: #5a2fa5; }
     <div class="content">
         <h1>Anmeldung zum Jugendtag in Bietigheim-Bissingen</h1>
         <div class="description">
-            <p class ="kleiner-abstand">Thema: Die geistliche Waffenrüstung des Christen</p>
-            <p class ="kleiner-abstand">Referent: Stephan Isenberg</p>
-            <p class ="kleiner-abstand">Datum: 28. März 2026</p>
-            <p class ="kleiner-abstand">Uhrzeit: 14:00 - 21:00 Uhr</p>
-            <p class ="kleiner-abstand">Adresse: Gustav-Mahler-Straße 4, 74321 Bietigheim-Bissingen</p>
+            <p>Thema: Die geistliche Waffenrüstung des Christen</p>
+            <p>Referent: Stephan Isenberg</p>
+            <p>Datum: 28. März 2026</p>
+            <p>Uhrzeit: 14:00 - 21:00 Uhr</p>
+            <p>Adresse: Gustav-Mahler-Straße 4, 74321 Bietigheim-Bissingen</p>
             <p></p>
-            <p><strong>Anmeldeschluss: 20. März 2026</strong></p>
+            <p><strong>Anmeldeschluss: 15. März 2026</strong></p>
         </div>
 
         <form id="anmeldungForm">
@@ -52,27 +51,31 @@ button:hover { background: #5a2fa5; }
             </div>
 
             <div class="form-group">
-                <label class="required">Bitte auswählen, was du in der Pause gern machen würdest.
-                Je nach Teilnehmerzahl reservieren wir entsprechend einen Platz (z. B. Fußball- oder Volleyballfeld)</label>
+                <label class="required">Falls genügend Leute Sport machen wollen, werden wir Räumlichkeiten mieten. Bitte gib hier an, worauf du in der Pause am meisten Lust hast</label>
                 <div class="option"><input type="radio" name="teilnahme" value="Fußball" required> Fußball</div>
                 <div class="option"><input type="radio" name="teilnahme" value="Volleyball"> Volleyball</div>
                 <div class="option"><input type="radio" name="teilnahme" value="Tischtennis"> Tischtennis</div>
-                <div class="option"><input type="radio" name="teilnahme" value="Keines davon"> Gesellschaftsspiele/Spazieren/Reden,...</div>
+                <div class="option"><input type="radio" name="teilnahme" value="Keines davon"> Keines davon</div>
             </div>
 
             <div class="form-group">
-                <label> Damit wir mittags Kuchen und abends Salate haben, suchen wir ein paar Freiwillige 🙂
-        Wenn du etwas mitbringen magst, kannst du das hier eintragen: </label>
-                <div class="option"><input type="checkbox" id="otherCheck" value="Sonstiges"> Kuchen</div>
-                <div class="other-text" id="otherText">
-                    <input type="text" name="otherText" placeholder="Bitte angeben...">
-                    <br>
-                <div class="option"><input type="checkbox" id="otherCheck" value="Sonstiges"> Salat</div>
-                <div class="other-text" id="otherText">
-                    <input type="text" name="otherText" placeholder="Bitte angeben...">
-                </div>
-            </div>
+    <label>Damit wir mittags Kuchen und abends Salate haben, suchen wir ein paar Freiwillige 🙂<br>
+    Wenn du etwas mitbringen magst, kannst du das hier eintragen:</label>
 
+    <div class="option">
+        <input type="checkbox" id="kuchenCheck" value="Kuchen"> Kuchen
+    </div>
+    <div class="other-text" id="kuchenText" style="display:none;">
+        <input type="text" name="kuchenText" placeholder="Bitte angeben...">
+    </div>
+
+    <div class="option">
+        <input type="checkbox" id="salatCheck" value="Salat"> Salat
+    </div>
+    <div class="other-text" id="salatText" style="display:none;">
+        <input type="text" name="salatText" placeholder="Bitte angeben...">
+    </div>
+</div>
 
             <button type="submit">Anmeldung absenden</button>
 
@@ -87,14 +90,18 @@ button:hover { background: #5a2fa5; }
 </div>
 
 <script>
-// Sonstiges-Feld ein-/ausblenden
-const otherCheck = document.getElementById("otherCheck");
-const otherText = document.getElementById("otherText");
-otherCheck.addEventListener("change", function() {
-    otherText.style.display = this.checked ? "block" : "none";
-}
-}
+// Kuchen-Feld ein-/ausblenden
+const kuchenCheck = document.getElementById("kuchenCheck");
+const kuchenText = document.getElementById("kuchenText");
+kuchenCheck.addEventListener("change", function() {
+    kuchenText.style.display = this.checked ? "block" : "none";
+});
 
+// Salat-Feld ein-/ausblenden
+const salatCheck = document.getElementById("salatCheck");
+const salatText = document.getElementById("salatText");
+salatCheck.addEventListener("change", function() {
+    salatText.style.display = this.checked ? "block" : "none";
 });
 
 // Formular absenden an Serverless Function
@@ -130,17 +137,6 @@ document.getElementById("anmeldungForm").addEventListener("submit", async e => {
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
 
 
 
