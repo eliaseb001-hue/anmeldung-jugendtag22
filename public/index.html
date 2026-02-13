@@ -61,15 +61,29 @@ button:hover { background: #5a2fa5; }
             </div>
 
             <div class="form-group">
-                <label>Besondere Essenswünsedededche/Allergien</label>
-                <div class="option"><input type="checkbox" id="otherCheck1" value="Sonstiges"> Sonstiges</div>
-                <div class="other-text" id="otherText1">
-                    <input type="text" name="otherText1" placeholder="Bitte angeben..."></div>
-                <div class="option"><input type="checkbox" id="otherCheck2" value="Sonstiges"> eded</div>
-                <div class="other-text" id="otherText2">
-                    <input type="text" name="otherText2" placeholder="Bitte angeben...">
-                </div>
-            </div>
+    <label class="required">
+        Damit wir mittags Kuchen und abends Salate haben, suchen wir ein paar Freiwillige 🙂
+        Wenn du etwas mitbringen magst, kannst du das hier eintragen:
+    </label>
+
+    <!-- Kuchen -->
+    <div class="option">
+        <input type="checkbox" id="kuchenCheck" value="Kuchen" onchange="toggleField('kuchenCheck','kuchenText')">
+        Kuchen
+    </div>
+    <div class="other-text" id="kuchenText" style="display:none;">
+        <input type="text" name="kuchenDetails" id="kuchenInput" placeholder="Bitte angeben...">
+    </div>
+
+    <!-- Salat -->
+    <div class="option">
+        <input type="checkbox" id="salatCheck" value="Salat" onchange="toggleField('salatCheck','salatText')">
+        Salat
+    </div>
+    <div class="other-text" id="salatText" style="display:none;">
+        <input type="text" name="salatDetails" id="salatInput" placeholder="Bitte angeben...">
+    </div>
+</div>
 
 
             <button type="submit">Anmeldung absenden</button>
@@ -92,6 +106,21 @@ otherCheck1.addEventListener("change", function() {
     otherText1.style.display = this.checked ? "block" : "none";
 otherCheck2.addEventListener("change", function() {
     otherText2.style.display = this.checked ? "block" : "none";
+
+function toggleField(checkId, textId){
+    var check = document.getElementById(checkId);
+    var textDiv = document.getElementById(textId);
+    var input = textDiv.querySelector("input");
+
+    if(check.checked){
+        textDiv.style.display = "block";
+        input.required = true;   // wird Pflichtfeld wenn angehakt
+    } else {
+        textDiv.style.display = "none";
+        input.required = false;  // keine Pflicht mehr
+        input.value = "";        // Feld leeren
+    }
+}
 
 });
 
