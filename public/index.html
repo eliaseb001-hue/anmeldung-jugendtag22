@@ -60,13 +60,14 @@ button:hover { background: #5a2fa5; }
             </div>
 
             <div class="form-group">
-                <label class="required">Besondere Essenswünsche/Allergien</label>
-                <div class="option"><input type="checkbox" name="interessen" value="Keine"> Keine</div>
-                <div class="option"><input type="checkbox" name="interessen" value="Vegetarisch"> Vegetarisch</div>
-                <div class="option"><input type="checkbox" name="interessen" value="Glutenfrei"> Glutenfrei</div>
-                <div class="option"><input type="checkbox" id="otherCheck" value="Sonstiges"> Sonstiges</div>
-                <div class="other-text" id="otherText">
-                    <input type="text" name="otherText" placeholder="Bitte angeben...">
+                <label class="required">Damit wir mittags Kuchen und abends Salate haben, suchen wir ein paar Freiwillige 🙂 Wenn du etwas mitbringen magst, kannst du das hier eintragen:</label>
+                <div class="option"><input type="checkbox" id="otherCheck1" value="Kuchen"> Kuchen</div>
+                    <div class="other-text" id="otherText">
+                        <input type="text" name="otherText" placeholder="Bitte angeben...">
+                </div>
+                <div class="option"><input type="checkbox" id="otherCheck2" value="Salat"> Salat</div>
+                    <div class="other-text" id="otherText">
+                        <input type="text" name="otherText" placeholder="Bitte angeben...">
                 </div>
             </div>
 
@@ -123,6 +124,7 @@ document.getElementById("anmeldungForm").addEventListener("submit", async e => {
 
 </body>
 </html>
+
 
 
 
