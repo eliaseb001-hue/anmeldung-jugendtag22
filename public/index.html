@@ -42,7 +42,7 @@ button:hover { background: #5a2fa5; }
             <p class ="kleiner-abstand">Uhrzeit: 14:00 - 21:00 Uhr</p>
             <p class ="kleiner-abstand">Adresse: Gustav-Mahler-Straße 4, 74321 Bietigheim-Bissingen</p>
             <p></p>
-            <p><strong>Anmeldeschluss: 15. März 2026</strong></p>
+            <p><strong>Anmeldeschluss: 20. März 2026</strong></p>
         </div>
 
         <form id="anmeldungForm">
@@ -52,24 +52,26 @@ button:hover { background: #5a2fa5; }
             </div>
 
             <div class="form-group">
-                <label class="required">Falls genügend Leute Sport machen wollen, werden wir Räumlichkeiten mieten. Bitte gib hier an, worauf du in der Pause am meisten Lust hast</label>
+                <label class="required">Bitte auswählen, was du in der Pause gern machen würdest.
+                Je nach Teilnehmerzahl reservieren wir entsprechend einen Platz (z. B. Fußball- oder Volleyballfeld)</label>
                 <div class="option"><input type="radio" name="teilnahme" value="Fußball" required> Fußball</div>
                 <div class="option"><input type="radio" name="teilnahme" value="Volleyball"> Volleyball</div>
                 <div class="option"><input type="radio" name="teilnahme" value="Tischtennis"> Tischtennis</div>
-                <div class="option"><input type="radio" name="teilnahme" value="Keines davon"> Keines davon</div>
+                <div class="option"><input type="radio" name="teilnahme" value="Keines davon"> Gesellschaftsspiele/Spazieren/Reden,...</div>
             </div>
 
-            <div class="form-group">
+              <div class="form-group">
                 <label class="required">Damit wir mittags Kuchen und abends Salate haben, suchen wir ein paar Freiwillige 🙂 Wenn du etwas mitbringen magst, kannst du das hier eintragen:</label>
-                <div class="option"><input type="checkbox" id="otherCheck1" value="Kuchen"> Kuchen</div>
-                    <div class="other-text" id="otherText">
-                        <input type="text" name="otherText" placeholder="Bitte angeben...">
+                <div class="other-text" id="otherText1" style="display:none;"><input type="checkbox" id="otherCheck1" value="Kuchen" onclick="toggle('otherText1')"> Kuchen</div>
+                    <div class="other-text" id="otherText1">
+                        <input type="text" name="otherText1" placeholder="Bitte angeben...">
                 </div>
-                <div class="option"><input type="checkbox" id="otherCheck2" value="Salat"> Salat</div>
-                    <div class="other-text" id="otherText">
-                        <input type="text" name="otherText" placeholder="Bitte angeben...">
+               <div class="other-text" id="otherText1" style="display:none;"><input type="checkbox" id="otherCheck2" value="Salat" onclick="toggle('otherText2')"> Salat</div>
+                    <div class="other-text" id="otherText2">
+                        <input type="text" name="otherText2" placeholder="Bitte angeben...">
                 </div>
             </div>
+
 
             <button type="submit">Anmeldung absenden</button>
 
@@ -87,8 +89,18 @@ button:hover { background: #5a2fa5; }
 // Sonstiges-Feld ein-/ausblenden
 const otherCheck = document.getElementById("otherCheck");
 const otherText = document.getElementById("otherText");
-otherCheck.addEventListener("change", function() {
-    otherText.style.display = this.checked ? "block" : "none";
+otherCheck1.addEventListener("change", function() {
+    otherText1.style.display = this.checked ? "block" : "none";
+otherCheck2.addEventListener("change", function() {
+    otherText2.style.display = this.checked ? "block" : "none";
+function toggle(id){
+var x = document.getElementById(id);
+    if(x.style.display === "none"){
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
 });
 
 // Formular absenden an Serverless Function
@@ -124,8 +136,6 @@ document.getElementById("anmeldungForm").addEventListener("submit", async e => {
 
 </body>
 </html>
-
-
 
 
 
