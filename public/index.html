@@ -68,20 +68,18 @@ button:hover { background: #5a2fa5; }
 
     <!-- Kuchen -->
     <div class="option">
-        <input type="checkbox" id="kuchenCheck" value="Kuchen" onchange="toggleField('kuchenCheck','kuchenText')">
-        Kuchen
+        <input type="checkbox" id="otherCheck1" value="Kuchen" onclick="toggleText('otherText1')"> Kuchen
     </div>
-    <div class="other-text" id="kuchenText" style="display:none;">
-        <input type="text" name="kuchenDetails" id="kuchenInput" placeholder="Bitte angeben...">
+    <div class="other-text" id="otherText1" style="display:none;">
+        <input type="text" name="otherText1" placeholder="Bitte angeben...">
     </div>
 
     <!-- Salat -->
     <div class="option">
-        <input type="checkbox" id="salatCheck" value="Salat" onchange="toggleField('salatCheck','salatText')">
-        Salat
+        <input type="checkbox" id="otherCheck2" value="Salat" onclick="toggleText('otherText2')"> Salat
     </div>
-    <div class="other-text" id="salatText" style="display:none;">
-        <input type="text" name="salatDetails" id="salatInput" placeholder="Bitte angeben...">
+    <div class="other-text" id="otherText2" style="display:none;">
+        <input type="text" name="otherText2" placeholder="Bitte angeben...">
     </div>
 </div>
 
@@ -106,20 +104,14 @@ otherCheck1.addEventListener("change", function() {
     otherText1.style.display = this.checked ? "block" : "none";
 otherCheck2.addEventListener("change", function() {
     otherText2.style.display = this.checked ? "block" : "none";
-
-function toggleField(checkId, textId){
-    var check = document.getElementById(checkId);
-    var textDiv = document.getElementById(textId);
-    var input = textDiv.querySelector("input");
-
-    if(check.checked){
-        textDiv.style.display = "block";
-        input.required = true;   // wird Pflichtfeld wenn angehakt
+function toggleText(id){
+    var field = document.getElementById(id);
+    if(field.style.display === "none"){
+        field.style.display = "block";
     } else {
-        textDiv.style.display = "none";
-        input.required = false;  // keine Pflicht mehr
-        input.value = "";        // Feld leeren
+        field.style.display = "none";
     }
+}
 }
 
 });
@@ -157,6 +149,7 @@ document.getElementById("anmeldungForm").addEventListener("submit", async e => {
 
 </body>
 </html>
+
 
 
 
