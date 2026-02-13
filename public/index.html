@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="de">
 <head>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -67,9 +67,9 @@ button:hover { background: #5a2fa5; }
                 <div class="other-text" id="otherText">
                     <input type="text" name="otherText" placeholder="Bitte angeben...">
                     <br>
-                <div class="option"><input type="checkbox" id="otherCheck2" value="Sonstiges"> Salat</div>
-                <div class="other-text" id="otherText1">
-                    <input type="text" name="otherText1" placeholder="Bitte angeben...">
+                <div class="option"><input type="checkbox" id="otherCheck" value="Sonstiges"> Salat</div>
+                <div class="other-text" id="otherText">
+                    <input type="text" name="otherText" placeholder="Bitte angeben...">
                 </div>
             </div>
 
@@ -92,8 +92,6 @@ const otherCheck = document.getElementById("otherCheck");
 const otherText = document.getElementById("otherText");
 otherCheck.addEventListener("change", function() {
     otherText.style.display = this.checked ? "block" : "none";
-otherCheck1.addEventListener("change", function() {
-    otherText1.style.display = this.checked ? "block" : "none";
 }
 }
 
@@ -132,6 +130,7 @@ document.getElementById("anmeldungForm").addEventListener("submit", async e => {
 
 </body>
 </html>
+
 
 
 
