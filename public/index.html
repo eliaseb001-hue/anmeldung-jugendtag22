@@ -61,27 +61,17 @@ button:hover { background: #5a2fa5; }
             </div>
 
             <div class="form-group">
-    <label class="required">
-        Damit wir mittags Kuchen und abends Salate haben, suchen wir ein paar Freiwillige 🙂
-        Wenn du etwas mitbringen magst, kannst du das hier eintragen:
-    </label>
-
-    <!-- Kuchen -->
-    <div class="option">
-        <input type="checkbox" id="otherCheck1" value="Kuchen" onclick="toggleText('otherText1')"> Kuchen
-    </div>
-    <div class="other-text" id="otherText1" style="display:none;">
-        <input type="text" name="otherText1" placeholder="Bitte angeben...">
-    </div>
-
-    <!-- Salat -->
-    <div class="option">
-        <input type="checkbox" id="otherCheck2" value="Salat" onclick="toggleText('otherText2')"> Salat
-    </div>
-    <div class="other-text" id="otherText2" style="display:none;">
-        <input type="text" name="otherText2" placeholder="Bitte angeben...">
-    </div>
-</div>
+                <label> Damit wir mittags Kuchen und abends Salate haben, suchen wir ein paar Freiwillige 🙂
+        Wenn du etwas mitbringen magst, kannst du das hier eintragen: </label>
+                <div class="option"><input type="checkbox" id="otherCheck" value="Sonstiges"> Kuchen</div>
+                <div class="other-text" id="otherText">
+                    <input type="text" name="otherText" placeholder="Bitte angeben...">
+                    <br>
+                <div class="option"><input type="checkbox" id="otherCheck2" value="Sonstiges"> Salat</div>
+                <div class="other-text" id="otherText1">
+                    <input type="text" name="otherText1" placeholder="Bitte angeben...">
+                </div>
+            </div>
 
 
             <button type="submit">Anmeldung absenden</button>
@@ -100,17 +90,10 @@ button:hover { background: #5a2fa5; }
 // Sonstiges-Feld ein-/ausblenden
 const otherCheck = document.getElementById("otherCheck");
 const otherText = document.getElementById("otherText");
+otherCheck.addEventListener("change", function() {
+    otherText.style.display = this.checked ? "block" : "none";
 otherCheck1.addEventListener("change", function() {
     otherText1.style.display = this.checked ? "block" : "none";
-otherCheck2.addEventListener("change", function() {
-    otherText2.style.display = this.checked ? "block" : "none";
-function toggleText(id){
-    var field = document.getElementById(id);
-    if(field.style.display === "none"){
-        field.style.display = "block";
-    } else {
-        field.style.display = "none";
-    }
 }
 }
 
@@ -149,6 +132,7 @@ document.getElementById("anmeldungForm").addEventListener("submit", async e => {
 
 </body>
 </html>
+
 
 
 
