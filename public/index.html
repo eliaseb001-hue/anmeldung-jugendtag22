@@ -295,8 +295,8 @@ document.getElementById("anmeldungForm").addEventListener("submit", async e => {
     const data = {
         name: formData.get("name"),
         teilnahme: formData.get("teilnahme"),
-        interessen: formData.getAll("interessen").join(", "),
-        sonstiges: formData.get("otherText") || ""
+        kuchen: formData.getAll("kuchenText").join(", "),
+        Salat: formData.get("salatText") || ""
     };
 
     try {
@@ -321,6 +321,7 @@ document.getElementById("anmeldungForm").addEventListener("submit", async e => {
 
 </body>
 </html>
+
 
 
 
