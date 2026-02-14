@@ -7,8 +7,93 @@
 <title>Anmeldung Jugendtag</title>
 <style>
 body { font-family: 'Inter', sans-serif; background: #f0ebf8; margin: 0; padding: 40px 15px; }
-.form-container { max-width: 700px; margin: auto; background: white; border-radius: 14px; box-shadow: 0 6px 18px rgba(0,0,0,0.1); overflow: hidden; }
+.form-container { max-width: 800px; margin: auto; background: white; border-radius: 14px; box-shadow: 0 6px 18px rgba(0,0,0,0.1); overflow: hidden; }
+
+.form-container h2 {
+    text-align: center;
+  }
+
+  /* Mini Bild Button */
+  .program-button {
+    display: flex;
+    flex-direction: column; /* Bild oben, Text unten */
+    align-items: flex-start; /* linksbündig */
+    cursor: pointer;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #333;
+  }
+
+  .program-button img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s;
+  }
+
+  .program-button img:hover {
+    transform: scale(1.05);
+  }
+
+  .program-button span {
+    font-weight: bold;    /* optional, wenn du fett + kursiv willst */
+    font-style: italic;   /* macht den Text kursiv */
+    margin-top: 0;    
+  }
+
+  /* Modal Styles */
+  .modal {
+    display: none; /* versteckt standardmäßig */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    backdrop-filter: blur(5px); /* Hintergrund unscharf */
+    background-color: rgba(0,0,0,0.6); /* abgedunkelt */
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-content {
+    position: relative;
+    background: #fff;
+    padding: 20px;
+    max-width: 600px;
+    width: 90%;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .modal-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+  }
+
+  .close-btn:hover {
+    color: #ff0000;
+  }
 .banner img { width: 100%; height: 200px; object-fit: cover; display: block; }
+@media (max-width: 768px) {
+  .banner img {
+    height: auto;
+    object-fit: contain;
+  }
+}
 .content { padding: 30px 35px; }
 h1 { margin-top: 0; font-size: 26px; }
 .description { color: #555; margin-bottom: 30px; line-height: 1.5; }
@@ -24,6 +109,7 @@ button { background: #673ab7; color: white; border: none; padding: 14px 22px; bo
 button:hover { background: #5a2fa5; }
 .footer-note { margin-top: 20px; font-size: 13px; color: #777; }
 </style>
+<link rel="icon" href="favicon.jpg" type="image/x-icon">
 </head>
 <body>
 
@@ -41,23 +127,43 @@ button:hover { background: #5a2fa5; }
             <p>Uhrzeit: 14:00 - 21:00 Uhr</p>
             <p>Adresse: Gustav-Mahler-Straße 4, 74321 Bietigheim-Bissingen</p>
             <p></p>
-            <p><strong>Anmeldeschluss: 15. März 2026</strong></p>
+            <p><strong>Anmeldeschluss: 20. März 2026</strong></p>
         </div>
+<!-- Trenner oben -->
+<hr class="divider">
 
+<div class="program-button" onclick="document.getElementById('programModal').style.display='flex'">
+  <img src="Programm.jpg" alt="Programm">
+  <span>Programm</span>
+</div>
+
+<!-- Trenner unten -->
+<hr class="divider">
+
+<!-- Modal -->
+<div id="programModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="document.getElementById('programModal').style.display='none'">&times;</span>
+    <img src="Programm.jpg" alt="Großes Programm Bild">
+  </div>
+</div>
+
+<br>
+<br>
         <form id="anmeldungForm">
             <div class="form-group">
                 <label class="required">Dein Name</label>
                 <input type="text" name="name" required placeholder="Vor- und Nachname">
             </div>
-
+<br>
             <div class="form-group">
                 <label class="required">Falls genügend Leute Sport machen wollen, werden wir Räumlichkeiten mieten. Bitte gib hier an, worauf du in der Pause am meisten Lust hast</label>
-                <div class="option"><input type="radio" name="teilnahme" value="Fußball" required> Fußball</div>
-                <div class="option"><input type="radio" name="teilnahme" value="Volleyball"> Volleyball</div>
-                <div class="option"><input type="radio" name="teilnahme" value="Tischtennis"> Tischtennis</div>
-                <div class="option"><input type="radio" name="teilnahme" value="Keines davon"> Keines davon</div>
+                <div class="option"><input type="checkbox" name="teilnahme" value="Fußball" required> Fußball</div>
+                <div class="option"><input type="checkbox" name="teilnahme" value="Volleyball"> Volleyball</div>
+                <div class="option"><input type="checkbox" name="teilnahme" value="Tischtennis"> Tischtennis</div>
+                <div class="option"><input type="checkbox" name="teilnahme" value="Keines davon"> Keines davon</div>
             </div>
-
+<br>
             <div class="form-group">
     <label>Damit wir mittags Kuchen und abends Salate haben, suchen wir ein paar Freiwillige 🙂<br>
     Wenn du etwas mitbringen magst, kannst du das hier eintragen:</label>
@@ -102,6 +208,26 @@ const salatCheck = document.getElementById("salatCheck");
 const salatText = document.getElementById("salatText");
 salatCheck.addEventListener("change", function() {
     salatText.style.display = this.checked ? "block" : "none";
+
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('programModal');
+  const btn = document.getElementById('programBtn');
+  const closeBtn = document.getElementById('closeModal');
+
+  btn.addEventListener('click', () => {
+    modal.style.display = 'flex';
+  });
+
+  closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+});
 });
 
 // Formular absenden an Serverless Function
@@ -137,8 +263,3 @@ document.getElementById("anmeldungForm").addEventListener("submit", async e => {
 
 </body>
 </html>
-
-
-
-
-
