@@ -2,11 +2,12 @@
 <html lang="de">
 <head>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Anmeldung Jugendtag</title>
 <style>
-body { font-family: 'Inter', sans-serif; background: #f0ebf8; margin: 0; padding: 40px 15px; }
+body { font-family: 'Comic Neue', cursive; background: #f0ebf8; margin: 0; padding: 40px 15px; }
 .form-container { max-width: 800px; margin: auto; background: white; border-radius: 14px; box-shadow: 0 6px 18px rgba(0,0,0,0.1); overflow: hidden; }
 
 .form-container h2 {
@@ -78,7 +79,7 @@ body { font-family: 'Inter', sans-serif; background: #f0ebf8; margin: 0; padding
     position: absolute;
     top: 10px;
     right: 15px;
-    font-size: 24px;
+    font-size: 35px;
     font-weight: bold;
     color: #333;
     cursor: pointer;
@@ -92,6 +93,62 @@ body { font-family: 'Inter', sans-serif; background: #f0ebf8; margin: 0; padding
   .banner img {
     height: auto;
     object-fit: contain;
+  }
+     body {
+    padding: 20px 10px; /* weniger Außenabstand */
+  }
+
+  h1 {
+    font-size: 20px;      /* kleinere Überschrift */
+  }
+
+  .description {
+    font-size: 14px;      /* kleinere Schrift im Text */
+    line-height: 1.3;     /* engerer Zeilenabstand */
+  }
+
+  .form-group {
+    margin-bottom: 18px;  /* weniger Abstand zwischen Feldern */
+  }
+
+  label {
+    font-size: 14px;      /* kleinere Labels */
+  }
+
+  input[type="text"], textarea {
+    font-size: 14px;      /* kleinere Eingabefelder */
+    padding: 10px;        /* etwas weniger Padding */
+  }
+
+  button {
+    padding: 12px 18px;   /* kleinere Buttons */
+    font-size: 15px;
+  }
+
+  .program-button span {
+    font-size: 13px;      /* kleinere Bild-Untertitel */
+  }
+
+    .content h1 {
+    font-size: 20px;    /* kleinere Überschrift auf Handy */
+    line-height: 1.2;
+    margin-bottom: 15px; /* etwas Abstand nach unten */
+  }
+
+  /* .description Text kleiner und Zeilen enger */
+  .content .description {
+    font-size: 14px;    /* kleinere Schrift */
+    line-height: 1.0;   /* engerer Zeilenabstand innerhalb der Absätze */
+  }
+
+  /* Abstand zwischen den <p>-Tags in .description reduzieren */
+  .content .description p {
+    margin-bottom: 8px; /* kleinerer Abstand zwischen Absätzen */
+  }
+
+  /* Letzten Absatz keinen extra Abstand */
+  .content .description p:last-child {
+    margin-bottom: 0;
   }
 }
 .content { padding: 30px 35px; }
@@ -157,11 +214,12 @@ button:hover { background: #5a2fa5; }
             </div>
 <br>
             <div class="form-group">
-                <label class="required">Falls genügend Leute Sport machen wollen, werden wir Räumlichkeiten mieten. Bitte gib hier an, worauf du in der Pause am meisten Lust hast</label>
+                <label class="required">Bitte auswählen, was du in der Pause gern machen würdest.
+                Je nach Teilnehmerzahl reservieren wir entsprechend einen Platz (z. B. Fußball- oder Volleyballfeld)</label>
                 <div class="option"><input type="checkbox" name="teilnahme" value="Fußball" required> Fußball</div>
                 <div class="option"><input type="checkbox" name="teilnahme" value="Volleyball"> Volleyball</div>
                 <div class="option"><input type="checkbox" name="teilnahme" value="Tischtennis"> Tischtennis</div>
-                <div class="option"><input type="checkbox" name="teilnahme" value="Keines davon"> Keines davon</div>
+                <div class="option"><input type="checkbox" name="teilnahme" value="Sonstiges"> Sonstiges (Gesellschaftsspiel etc.)</div>
             </div>
 <br>
             <div class="form-group">
@@ -263,3 +321,5 @@ document.getElementById("anmeldungForm").addEventListener("submit", async e => {
 
 </body>
 </html>
+
+
